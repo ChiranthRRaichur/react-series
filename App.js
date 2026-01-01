@@ -1,10 +1,24 @@
-//created an Element i.e. h1 using React.
-const heading = React.createElement("h1", { id: "header" }, "Hey Hey !! My first React Programm");
+/*
+//Create a Nested elements using React
 
-console.log(heading); // returns an object
+  <div id="parent">
+        <div id="child">
+            <h1>Iam H1 Tag</h1>
+        </div>
+    </div>
+*/
 
-// Now we have to render this h1 inside root and attach it to the Browser or DOM using ReactDOM
-// root is the place where all the react will run/ render
+const parent = React.createElement(
+    "div", 
+    { id: "parent" }, 
+    React.createElement(
+        'div', 
+        { id: "child" }, 
+        React.createElement('h1', {}, "Iam H1 Tag")
+    )
+);
+
+
+const heading = React.createElement("h1", {}, "Hey Hey !! My first React Programm");
 const root = ReactDOM.createRoot(document.getElementById('head'));
-// Now render the root
 root.render(heading);
