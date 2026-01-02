@@ -1,17 +1,5 @@
-/*
-//Create a Nested elements using React
-
-  <div id="parent">
-        <div id="child1">
-            <h1>Iam H1 Tag</h1>
-            <h1> Iam H2 Tag </h1>
-        </div>
-         <div id="child2">
-            <h1>Iam H1 Tag</h1>
-            <h1> Iam H2 Tag </h1>
-        </div>
-    </div>
-*/
+import React from "react";
+import ReactDOM from "react-dom/client";
 
 const parent = React.createElement(
     "div", 
