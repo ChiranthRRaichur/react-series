@@ -1,26 +1,19 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
-const parent = React.createElement(
-    "div", 
-    { id: "parent" }, 
-   [ React.createElement(
-        'div', 
-        { id: "child1" }, 
-        [React.createElement('h1', {}, "Iam H1 Tag"), React.createElement('h1', {}, "Iam H2 Tag")]
-    ),
-     React.createElement(
-        'div', 
-        { id: "child" }, 
-        [React.createElement('h1', {}, "Iam H1 Tag"), React.createElement('h1', {}, "Iam H2 Tag")]
-    )
-    ]
-);
-console.log(parent);
 
-const root = ReactDOM.createRoot(document.getElementById('head'));
+// Creating a React element using core React
+const heading = React.createElement("h1", {id:"crr"}, "CRR_React");  //=> It's an Object
+console.log(heading); 
+// const root = ReactDOM.createRoot(document.getElementById('root'));
+// root.render(heading);
 
+//JSX - JSX is a HTML-like or XML-like syntax. It is a JavaScript XML
+const headingJSX = <h1 id="crr"> CRR_React </h1>;
+console.log(headingJSX);
 
-// const heading = React.createElement("h1", {}, "Hey Hey !! My first React Programm");
-// const root = ReactDOM.createRoot(document.getElementById('head'));
-root.render(parent);
+//Both heading and headingJSX provide the same object in the logs
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(headingJSX);
+root.render(heading);
