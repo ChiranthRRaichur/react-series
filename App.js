@@ -1,19 +1,30 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
+//React Element (i.e. Object)
+const headingJSX = <h1 id="crr" className="crr_1"> CRR_React </h1>;
 
-// Creating a React element using core React
-const heading = React.createElement("h1", {id:"crr"}, "CRR_React");  //=> It's an Object
-console.log(heading); 
-// const root = ReactDOM.createRoot(document.getElementById('root'));
-// root.render(heading);
+//React Components:
+// 1. Functional Component -> latest way to write React components
+// 2. Class-based Component => old way
 
-//JSX - JSX is a HTML-like or XML-like syntax. It is a JavaScript XML
-const headingJSX = <h1 id="crr"> CRR_React </h1>;
-console.log(headingJSX);
+//Functional Component
+const HeadingFunctionalComponent = () => {
+    return <h1 id="crr" className="crr_1"> CRR_React </h1>;
+}
 
-//Both heading and headingJSX provide the same object in the logs
+// Class-based Component (old way)
+class HeadingClassComponent extends React.Component {
+  render() {
+    return (
+      <h1 id="crr" className="crr_1">
+        CRR_React
+      </h1>
+    );
+  }
+}
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(headingJSX);
-root.render(heading);
+root.render(<HeadingFunctionalComponent />);
+//root.render(<HeadingClassComponent />);
