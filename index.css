@@ -1,3 +1,139 @@
-#header{
-    color: red;
+/* ---------- Global Reset ---------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+/* ---------- App Container ---------- */
+.appContainer {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* ---------- Header ---------- */
+.headContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e0e0e0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+/* Logo (emoji / image placeholder) */
+.logo {
+  width: 40px;
+  height: 40px;
+}
+
+/* ---------- Navigation ---------- */
+.navLinks ul {
+  display: flex;
+  list-style: none;
+  gap: 30px;
+}
+
+.navLinks li {
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 15px;
+  color: #333;
+  transition: color 0.2s ease;
+}
+
+.navLinks li:hover {
+  color: #ff5722;
+}
+
+/* ---------- Body ---------- */
+.bodyContainer {
+  padding: 30px 40px;
+}
+
+/* ---------- Search ---------- */
+.searchContainer {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 35px;
+}
+
+.searchContainer input {
+  flex: 1;
+  padding: 10px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+}
+
+.searchContainer input:focus {
+  border-color: #ff5722;
+}
+
+.searchContainer button {
+  padding: 10px 22px;
+  background-color: #ff5722;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.searchContainer button:hover {
+  background-color: #e64a19;
+}
+
+/* ---------- Restaurant Cards Grid ---------- */
+.restaurantGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 25px;
+}
+
+/* ---------- Individual Card ---------- */
+.card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+}
+
+/* ---------- Card Image ---------- */
+.card-img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+/* ---------- Card Content ---------- */
+.card h3 {
+  font-size: 17px;
+  margin-bottom: 6px;
+}
+
+.card p {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 4px;
 }
