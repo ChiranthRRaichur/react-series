@@ -1771,7 +1771,7 @@ const Header = () => {
 
 const RestaurantCards = ( props) => {
     const {resData} = props; // Destructuring the Props
-    const {name, image, rating, cuisine} = resData.info;    // Destructuring the Props
+    const {name, image, rating, cuisine} = resData?.info;    // Destructuring the Props & Optional Chaining
     return(
         <div className="restaurantCards">
             <div className="card">
