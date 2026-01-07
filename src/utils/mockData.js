@@ -1,18 +1,3 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-
-/*
-Food-Order Delivery App Low-level Design:
-Header
- - Logo
- - Nav links (Home, About, Cart)
-Main Content
- - Search
- - Restaurant cards
-Footer
- - Address and additional Info
-*/
-
 const restaurantList = [
     {
         "type": "restaurant",
@@ -1751,64 +1736,4 @@ const restaurantList = [
     }
 ]
 
-
-const Header = () => {
-    return(
-        <div className="headContainer">
-            <div>
-                <img className="logo"  alt="🍌"></img>
-            </div>
-            <div className="navLinks">
-                <ul>
-                    <li>Home</li>
-                    <li>About</li>
-                    <li>Cart</li>
-                </ul>
-            </div>
-        </div>
-    )
-}
-
-const RestaurantCards = ( props) => {
-    const {resData} = props; // Destructuring the Props
-    const {name, image, rating, cuisine} = resData?.info  || {};;    // Destructuring the Props & Optional Chaining and fallback handling
-    return(
-        <div className="restaurantCards">
-            <div className="card">
-                <img className="card-img" src={image.url} alt="🍔"></img>
-                <h3>{name}</h3>
-                <p>Rating: {rating.aggregate_rating}</p>
-                <p> {cuisine.map((cuisine) => cuisine.name).join(", ")}</p>
-            </div>
-        </div>
-    )
-}
-
-const Body = () => {
-    return(
-        <div className="bodyContainer">
-            <div className="searchContainer">   
-                <input type="text" placeholder="Search for restaurants..."/>
-                <button>Search</button>
-            </div>
-            <div className="restaurantGrid">
-                {restaurantList.map((restaurant) => <RestaurantCards key={restaurant.info.resId} resData = {restaurant} /> )}
-                
-            </div>
-        </div>
-    )
-}
-
-
-const AppLayout = () => {
-    return (
-        <div className="appContainer">
-            <Header/>
-            <Body/>
-        </div>
-    )
-}
-
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<AppLayout />);
+export default restaurantList;
