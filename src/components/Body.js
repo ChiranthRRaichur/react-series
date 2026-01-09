@@ -1,27 +1,71 @@
 import RestaurantCards from "./RestaurantCards";
-import restaurantList from "../utils/mockData";
-import { useState } from "react";
-import { useEffect } from "react";
+import SearchBar from "./SearchBar";
+import { useState, useEffect } from "react";
 
 const Body = () => {
-    const [resList, setresList] = useState(restaurantList)   //intializing the state with restaurantList JSON data and this is array destructuring
-    return(
-        <div className="bodyContainer">
-            <div className="searchContainer">   
-                <button className="Filter-Button" onClick={()=>{
-                    //console.log("Clicked");
-                    const res = restaurantList.filter((res)=> res.info.rating.aggregate_rating > 4.0)
-                    //console.log(res);
-                    setresList(res);
-                }}> Top Rated Restaurants</button>
-            </div>
-            <div className="restaurantGrid">
-                {/* {console.log("reslist: ",resList)} */}
-                {resList.map((restaurant) => <RestaurantCards key={restaurant.info.resId} resData = {restaurant} /> )}
-                
-            </div>
-        </div>
-    )
-}
+  const [resList, setResList] = useState([]);
+  const [filteredRestaurants, setFilteredRestaurants] = useState([]);
+  const [searchText, setSearchText] = useState("");
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    const data = await fetch(
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9121181&lng=77.6445548&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+    );
+    const json = await data.json();
+
+    //optional chaining
+    const restaurants =
+      json?.data?.cards?.[1]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants || [];
+
+    setResList(restaurants);
+    setFilteredRestaurants(restaurants);
+  };
+
+  const handleSearch = () => {
+    const filtered = resList.filter((res) =>
+      res.info.name.toLowerCase().includes(searchText.toLowerCase())
+    );
+    setFilteredRestaurants(filtered);
+  };
+
+  const handleTopRated = () => {
+    const filtered = resList.filter(
+      (res) => res.info.avgRating > 4.5
+    );
+    setFilteredRestaurants(filtered);
+  };
+
+  return (
+    <div className="bodyContainer">
+      <div className="searchContainer">
+        <SearchBar
+          searchText={searchText}
+          setSearchText={setSearchText}
+          onSearch={handleSearch}
+        />
+      </div>
+
+      <div className="searchContainer">
+        <button className="Filter-Button" onClick={handleTopRated}>
+          Top Rated Restaurants
+        </button>
+      </div>
+
+      <div className="restaurantGrid">
+        {filteredRestaurants.map((restaurant) => (
+          <RestaurantCards
+            key={restaurant.info.id}
+            resData={restaurant}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
 
 export default Body;
