@@ -1,6 +1,7 @@
 import RestaurantCards from "./RestaurantCards";
 import SearchBar from "./SearchBar";
 import { useState, useEffect } from "react";
+import Shimmer from "./Shimmer";
 
 const Body = () => {
   const [resList, setResList] = useState([]);
@@ -39,6 +40,10 @@ const Body = () => {
     );
     setFilteredRestaurants(filtered);
   };
+
+  if (resList.length === 0) {
+    return <Shimmer />;
+  }
 
   return (
     <div className="bodyContainer">
