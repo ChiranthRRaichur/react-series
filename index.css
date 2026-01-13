@@ -219,3 +219,127 @@ body {
     background-position: -100% 0;
   }
 }
+
+/* -------- Menu Page Container -------- */
+.menu-page {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 25px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* -------- Restaurant Info -------- */
+.menu-header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #222;
+}
+
+.menu-meta {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.menu-rating {
+  padding: 6px 12px;
+  background: #e6f4ea;
+  color: #137333;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.menu-cuisines {
+  font-size: 14px;
+  color: #666;
+}
+
+/* -------- Section Title -------- */
+.menu-section-title {
+  font-size: 20px;
+  margin-top: 25px;
+  margin-bottom: 12px;
+  font-weight: 700;
+  color: #333;
+}
+
+/* -------- Category Block -------- */
+.menu-category {
+  margin-top: 22px;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+}
+
+.menu-category h2 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 10px;
+}
+
+/* -------- Items List -------- */
+.menu-items {
+  list-style: none;
+  padding-left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* -------- Each Item -------- */
+.menu-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 12px;
+  border-radius: 10px;
+  background: #fafafa;
+  border: 1px solid #f0f0f0;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.menu-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.item-left {
+  flex: 1;
+}
+
+.item-name {
+  font-weight: 700;
+  font-size: 15px;
+  color: #222;
+  margin-bottom: 4px;
+}
+
+.item-desc {
+  font-size: 13px;
+  color: #777;
+  line-height: 1.4;
+}
+
+.item-right {
+  text-align: right;
+  min-width: 120px;
+}
+
+.item-price {
+  font-weight: 700;
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 6px;
+}
+
+.item-tag {
+  font-size: 14px;
+  font-weight: 700;
+}

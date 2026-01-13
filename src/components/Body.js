@@ -2,19 +2,16 @@ import RestaurantCards from "./RestaurantCards";
 import SearchBar from "./SearchBar";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
 
 const Body = () => {
   const [resList, setResList] = useState([]);
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   const [searchText, setSearchText] = useState("");
 
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const fetchData = async () => {
+    const fetchData = async () => {
     const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9121181&lng=77.6445548&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+     "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9121181&lng=77.6445548&is-seo-homepage-enabled=true"
     );
     const json = await data.json();
 
@@ -26,6 +23,12 @@ const Body = () => {
     setResList(restaurants);
     setFilteredRestaurants(restaurants);
   };
+
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
 
   const handleSearch = () => {
     const filtered = resList.filter((res) =>
@@ -63,10 +66,9 @@ const Body = () => {
 
       <div className="restaurantGrid">
         {filteredRestaurants.map((restaurant) => (
-          <RestaurantCards
-            key={restaurant.info.id}
+         <Link key={restaurant.info.id} to={`/restaurant/${restaurant.info.id}`} > <RestaurantCards
             resData={restaurant}
-          />
+          /></Link>
         ))}
       </div>
     </div>
