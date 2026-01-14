@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { dummyRestaurantMenus } from "../utils/dummy_restaurant_menus";
+import MenuShimmer from "./MenuShimmer";
 
 const RestaurantMenu = () => {
   const { resId } = useParams();
@@ -17,7 +18,7 @@ const RestaurantMenu = () => {
     console.log("Restaurant Set:", restaurant);
   }, [resId]);
 
-  if (!menuw) return <h2>Loading menu...</h2>;
+  if (!menuw) return <MenuShimmer />;
 
   return (
   <div className="menu-page">
