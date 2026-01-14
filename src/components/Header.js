@@ -1,35 +1,63 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const Header = () => {
-    const [signInState, setsignInState] = useState("Sign In");
-    return(
-        <div className="headContainer">
-            <div>
-                <img className="logo"  alt="🍌"></img>
-            </div>
-            <div className="navLinks">
-                <ul>
-                    <li className="Header">
-                        <Link to="/">Home</Link>
-                    </li>
-                    <li className="Header">
-                        <Link to="/about">About</Link>
-                    </li>
-                    <li className = "Header"> 
-                        <Link to="/contact">Contact </Link>
-                    </li>
-                    <li className="Header">
-                        <Link to="/cart">Cart</Link>
-                    </li>
-                    <button className="sign-in" onClick={()=>{
+  const navigate = useNavigate();
 
-                        signInState === "Sign In" ? setsignInState("Sign Out") : setsignInState("Sign In");
+  const [signInState, setSignInState] = useState("Sign In");
 
-                    }}> {signInState}</button>
-                </ul>
-            </div>
-        </div>
-    )
-}
+  useEffect(() => {
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+    if (isLoggedIn === "true") {
+      setSignInState("Sign Out");
+    }
+  }, [signInState]);
+
+  const logout = () => {
+    localStorage.removeItem("isLoggedIn");
+    setSignInState("Sign In");
+    navigate("/");
+  };
+
+  const handleAuthClick = () => {
+    if (signInState === "Sign In") {
+      navigate("/");
+    } else {
+      logout();
+    }
+  };
+
+  return (
+    <div className="headContainer">
+      <div>
+        <img className="logo" alt="🍌" />
+      </div>
+
+      <div className="navLinks">
+        <ul>
+          <li className="Header">
+            <Link to="/home">Home</Link>
+          </li>
+
+          <li className="Header">
+            <Link to="/about">About</Link>
+          </li>
+
+          <li className="Header">
+            <Link to="/contact">Contact</Link>
+          </li>
+
+          <li className="Header">
+            <Link to="/cart">Cart</Link>
+          </li>
+
+          <button className="sign-in" onClick={handleAuthClick}>
+            {signInState}
+          </button>
+        </ul>
+      </div>
+    </div>
+  );
+};
+
 export default Header;

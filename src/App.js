@@ -6,8 +6,19 @@ import About from "./components/About";
 import Contact from "./components/Contact";
 import Errorr from "./components/Errorr";
 import RestaurantMenu from "./components/RestaurantMenu";
-import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import LoginForm from "./components/LoginForm";
 
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+// for login
+const AuthLayout = () => {
+  return (
+    <div className="appContainer">
+      <Outlet />
+    </div>
+  );
+};
+
+//  Layout WITH header (for other pages)
 const AppLayout = () => {
   return (
     <div className="appContainer">
@@ -18,30 +29,42 @@ const AppLayout = () => {
 };
 
 const appRouter = createBrowserRouter([
+  // ✅ Auth Routes (NO HEADER)
+  {
+    path: "/",
+    element: <AuthLayout />,
+    errorElement: <Errorr />,
+    children: [
+      {
+        index: true,  // default route
+        element: <LoginForm />,
+      },
+    ],
+  },
+
+  // ✅ Main App Routes (WITH HEADER)
   {
     path: "/",
     element: <AppLayout />,
+    errorElement: <Errorr />,
     children: [
       {
-        path: "/",
+        path: "home",
         element: <Body />,
-        
       },
       {
-        path: "/about",
+        path: "about",
         element: <About />,
-        errorElement: <div>404 Page Not Found</div>,
       },
       {
-        path: "/contact",
+        path: "contact",
         element: <Contact />,
       },
       {
-        path: "/restaurant/:resId",
+        path: "restaurant/:resId",
         element: <RestaurantMenu />,
-      }
+      },
     ],
-    errorElement: <Errorr />,
   },
 ]);
 
