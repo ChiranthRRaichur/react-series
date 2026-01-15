@@ -30,7 +30,7 @@ const Header = () => {
         <div className="flex justify-between items-center h-20">
           
           {/* Logo Section */}
-          <div className="flex-shrink-0 flex items-center">
+          <div className="shrink-0 flex items-center">
             <Link to="/home">
               <span className="text-3xl filter grayscale-0 hover:scale-110 transition-transform cursor-pointer">
                 🍌
