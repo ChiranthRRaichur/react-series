@@ -1,76 +1,72 @@
 import RestaurantCards from "./RestaurantCards";
 import SearchBar from "./SearchBar";
-import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
+import useBody from "../utils/useBody";
 
 const Body = () => {
-  const [resList, setResList] = useState([]);
-  const [filteredRestaurants, setFilteredRestaurants] = useState([]);
-  const [searchText, setSearchText] = useState("");
+  const {
+    resList,
+    filteredRestaurants,
+    searchText,
+    setSearchText,
+    handleSearch,
+    handleTopRated,
+  } = useBody();
 
-  const fetchData = async () => {
-    const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9121181&lng=77.6445548&is-seo-homepage-enabled=true"
+  const isOnline = useOnlineStatus();
+
+  // Offline UI
+  if (!isOnline) {
+    return (
+      <div className="flex flex-col items-center justify-center h-[60vh] text-center p-4">
+        <h1 className="text-4xl mb-2">⚠️</h1>
+        <h2 className="text-2xl font-bold text-gray-800">You are offline</h2>
+        <p className="text-gray-600 mt-2">
+          Please check your internet connection and try again.
+        </p>
+      </div>
     );
-    const json = await data.json();
+  }
 
-    //optional chaining
-    const restaurants =
-      json?.data?.cards?.[1]?.card?.card?.gridElements?.infoWithStyle
-        ?.restaurants || [];
-
-    setResList(restaurants);
-    setFilteredRestaurants(restaurants);
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const handleSearch = () => {
-    const filtered = resList.filter((res) =>
-      res.info.name.toLowerCase().includes(searchText.toLowerCase())
-    );
-    setFilteredRestaurants(filtered);
-  };
-
-  const handleTopRated = () => {
-    const filtered = resList.filter((res) => res.info.avgRating > 4.5);
-    setFilteredRestaurants(filtered);
-  };
-
+  // Shimmer Loader
   if (resList.length === 0) {
     return <Shimmer />;
   }
 
   return (
-    <div className="bodyContainer">
-      <div className="searchContainer">
-        <SearchBar
-          searchText={searchText}
-          setSearchText={setSearchText}
-          onSearch={handleSearch}
-        />
-      </div>
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      {/* Search and Filters Section */}
+      <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-8">
+        <div className="w-full md:w-auto">
+          <SearchBar
+            searchText={searchText}
+            setSearchText={setSearchText}
+            onSearch={handleSearch}
+          />
+        </div>
 
-      <div className="searchContainer">
-        <button className="Filter-Button" onClick={handleTopRated}>
+        <button
+          className="px-6 py-2.5 bg-orange-500 text-white font-medium rounded-lg shadow-md hover:bg-orange-600 transition-all duration-200 active:scale-95"
+          onClick={handleTopRated}
+        >
           Top Rated Restaurants
         </button>
       </div>
 
-      <div className="restaurantGrid">
-        {filteredRestaurants.map((restaurant) => (
-          <Link
-            key={restaurant.info.id}
-            to={`/restaurant/${restaurant.info.id}`}
-            className="card-link"
-          >
-            <RestaurantCards resData={restaurant} />
-          </Link>
-        ))}
-      </div>
+     {/* Restaurant Grid */}
+<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+  {filteredRestaurants.map((restaurant) => (
+    <Link
+      key={restaurant.info.id}
+      to={`/restaurant/${restaurant.info.id}`}
+      className="flex flex-col p-4 border border-gray-100 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 bg-white group"
+    >
+      <RestaurantCards resData={restaurant} />
+    </Link>
+  ))}
+</div>
     </div>
   );
 };
