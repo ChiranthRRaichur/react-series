@@ -3,12 +3,13 @@ import MenuShimmer from "./MenuShimmer";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
 
 const RestaurantMenu = () => {
-  const { resId } = useParams();
-  const resInfo = useRestaurantMenu(resId);
+    const { resId } = useParams();
+    const resInfo = useRestaurantMenu(resId);
 
   if (!resInfo) return <MenuShimmer />;
 
   const { name, cuisines, rating } = resInfo;
+  console.log("resMenuINfo", resInfo);
 
   return (
     <div className="max-w-3xl mx-auto p-4 pt-8">

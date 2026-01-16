@@ -1,4 +1,4 @@
-import RestaurantCards from "./RestaurantCards";
+import RestaurantCards, { Withlabeleddiscount } from "./RestaurantCards";
 import SearchBar from "./SearchBar";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
@@ -16,6 +16,9 @@ const Body = () => {
   } = useBody();
 
   const isOnline = useOnlineStatus();
+
+  //Higher Order Component - A function that takes another function (or component) as an argument and returns a new function (or component) with enhanced behavior.
+  const IsLabeledRestaurant = Withlabeleddiscount(RestaurantCards);
 
   // Offline UI
   if (!isOnline) {
@@ -55,18 +58,22 @@ const Body = () => {
         </button>
       </div>
 
-     {/* Restaurant Grid */}
-<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-  {filteredRestaurants.map((restaurant) => (
-    <Link
-      key={restaurant.info.id}
-      to={`/restaurant/${restaurant.info.id}`}
-      className="flex flex-col p-4 border border-gray-100 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 bg-white group"
-    >
-      <RestaurantCards resData={restaurant} />
-    </Link>
-  ))}
-</div>
+      {/* Restaurant Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {filteredRestaurants.map((restaurant) => (
+          <Link
+            key={restaurant.info.id}
+            to={`/restaurant/${restaurant.info.id}`}
+            className="flex flex-col p-4 border border-gray-100 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 bg-white group"
+          >
+            {IsLabeledRestaurant ? (
+              <IsLabeledRestaurant resData={restaurant} />
+            ) : (
+              <RestaurantCards resData={restaurant} />
+            )}
+          </Link>
+        ))}
+      </div>
     </div>
   );
 };

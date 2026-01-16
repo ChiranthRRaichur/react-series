@@ -16,6 +16,7 @@ const useBody = () => {
         json?.data?.cards?.[1]?.card?.card?.gridElements?.infoWithStyle
           ?.restaurants || [];
 
+          console.log("restaurants", restaurants);
       setResList(restaurants);
       setFilteredRestaurants(restaurants);
     };

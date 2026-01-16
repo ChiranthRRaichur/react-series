@@ -52,4 +52,24 @@ const RestaurantCards = (props) => {
   );
 };
 
+//Higher Order Component
+export const Withlabeleddiscount = (RestaurantCards) => {
+  return (props) => {
+    // Check if the restaurant has a 50% OFF discount
+    const discountHeader = props?.resData?.info?.aggregatedDiscountInfoV3?.header;
+    const isFiftyOff = discountHeader === "50% OFF";
+
+    return (
+      <div className="relative w-full h-full">
+        {isFiftyOff && (
+          <label className="absolute top-2 left-2 z-20 bg-black text-white text-[10px] font-bold px-2 py-1 rounded-md shadow-lg uppercase">
+            🔥 50% OFF
+          </label>
+        )}
+        {/* Render the original component with all passed props */}
+        <RestaurantCards {...props} />
+      </div>
+    );
+  };
+};
 export default RestaurantCards;
