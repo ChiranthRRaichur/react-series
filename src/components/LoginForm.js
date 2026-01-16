@@ -1,9 +1,13 @@
-import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router";
+import { useContext } from "react";
+import LoggedUserContext from "../utils/LoggedUserContext";
+
 
 const LoginForm = () => {
+  //const { setUsername } = useContext(LoggedUserContext);
+
   const navigate = useNavigate();
   const initialValues = { email: "", password: "" };
 
@@ -12,14 +16,22 @@ const LoginForm = () => {
     password: Yup.string().required("Required"),
   });
 
+
   const onSubmit = (values, { setSubmitting }) => {
-    setTimeout(() => {
-      console.log("Logged in:", values);
-      setSubmitting(false);
-      localStorage.setItem("isLoggedIn", "true");
-      navigate("/home");
-    }, 400);
-  };
+  setTimeout(() => {
+    const username = values.email.split("@")[0];
+   // console.log("Username set to:", username);
+    setUsername(username);
+
+    localStorage.setItem("isLoggedIn", "true");
+    localStorage.setItem("username", username);
+
+    setSubmitting(false);
+    navigate("/home");
+  }, 400);
+};
+
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
