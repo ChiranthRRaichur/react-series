@@ -10,3 +10,12 @@ Main Content
 Footer
  - Address and additional Info
 
+
+
+# Redux Toolkit
+- Install @reduxjs/toolkit and react-redux
+- Build our own store 
+- Connect our to app
+- Slice (Cart slice)
+- Dispatch (action)
+- Selector

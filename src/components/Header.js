@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import { useContext } from "react";
 import LoggedUserContext from "../utils/LoggedUserContext";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const { username } = useContext(LoggedUserContext);
@@ -28,6 +29,10 @@ const Header = () => {
   const handleAuthClick = () => {
     signInState === "Sign In" ? navigate("/") : logout();
   };
+
+  // Subscribing to the store using a Selector
+  const cartItems = useSelector((store) => store.cart.items);
+  console.log("Cart Items:", cartItems);
 
   return (
     <nav className="sticky top-0 z-50 w-full bg-white border-b border-gray-200 shadow-sm">
@@ -92,7 +97,7 @@ const Header = () => {
                 >
                   Cart
                   <span className="ml-1 bg-orange-100 text-orange-600 text-xs font-bold px-2 py-0.5 rounded-full">
-                    0
+                    {cartItems.length}
                   </span>
                 </Link>
               </li>
