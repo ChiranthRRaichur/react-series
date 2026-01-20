@@ -5,6 +5,7 @@ import {
   decreaseItem,
   addItem,
 } from "../utils/cartSlice";
+import React from "react";
 
 const Cart = () => {
   // subscribing to the specific slice (cart slice) of the store
@@ -60,7 +61,7 @@ const Cart = () => {
                 Your cart is empty
               </h2>
               <p className="text-gray-500 mt-2">
-                Looks like you haven't added anything yet.
+                Looks like you haven&apos;t added anything yet.
               </p>
               <button className="mt-8 px-8 py-3 bg-orange-500 text-white font-bold rounded-full hover:bg-orange-600 transition-transform active:scale-95 shadow-lg shadow-orange-200">
                 Go Shopping
@@ -74,9 +75,9 @@ const Cart = () => {
                   className="p-6 flex items-center gap-6 hover:bg-gray-50 transition-colors"
                 >
                   {/* Item Image Placeholder */}
-                  <div className="w-24 h-24 bg-gray-100 rounded-2xl flex-shrink-0 overflow-hidden">
+                  <div className="w-24 h-24 bg-gray-100 rounded-2xl shrink-0 overflow-hidden">
                     🍔
-                    <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200"></div>
+                    <div className="w-full h-full bg-linear-to-br from-gray-100 to-gray-200"></div>
                   </div>
 
                   {/* Item Info */}

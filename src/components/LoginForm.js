@@ -3,10 +3,10 @@ import * as Yup from "yup";
 import { useNavigate } from "react-router";
 import { useContext } from "react";
 import LoggedUserContext from "../utils/LoggedUserContext";
-
+import React from "react";
 
 const LoginForm = () => {
-  //const { setUsername } = useContext(LoggedUserContext);
+  const { setUsername } = useContext(LoggedUserContext);
 
   const navigate = useNavigate();
   const initialValues = { email: "", password: "" };
@@ -16,29 +16,30 @@ const LoginForm = () => {
     password: Yup.string().required("Required"),
   });
 
-
   const onSubmit = (values, { setSubmitting }) => {
-  setTimeout(() => {
-    const username = values.email.split("@")[0];
-   // console.log("Username set to:", username);
-    setUsername(username);
+    setTimeout(() => {
+      const username = values.email.split("@")[0];
+      // console.log("Username set to:", username);
+      setUsername(username);
 
-    localStorage.setItem("isLoggedIn", "true");
-    localStorage.setItem("username", username);
+      localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem("username", username);
 
-    setSubmitting(false);
-    navigate("/home");
-  }, 400);
-};
-
-
+      setSubmitting(false);
+      navigate("/home");
+    }, 400);
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
       <div className="max-w-md w-full bg-white p-8 rounded-2xl shadow-xl border border-gray-100">
         <div className="text-center mb-8">
-          <h2 className="text-3xl font-extrabold text-gray-900">Welcome Back</h2>
-          <p className="text-gray-500 mt-2">Please enter your details to login</p>
+          <h2 className="text-3xl font-extrabold text-gray-900">
+            Welcome Back
+          </h2>
+          <p className="text-gray-500 mt-2">
+            Please enter your details to login
+          </p>
         </div>
 
         <Formik
@@ -50,7 +51,10 @@ const LoginForm = () => {
             <Form className="space-y-6">
               {/* Email Field */}
               <div className="flex flex-col gap-1">
-                <label htmlFor="email" className="text-sm font-semibold text-gray-700">
+                <label
+                  htmlFor="email"
+                  className="text-sm font-semibold text-gray-700"
+                >
                   Email Address
                 </label>
                 <Field
@@ -58,17 +62,25 @@ const LoginForm = () => {
                   type="email"
                   placeholder="name@company.com"
                   className={`w-full px-4 py-3 rounded-lg border transition-all outline-none focus:ring-2 
-                    ${errors.email && touched.email 
-                      ? "border-red-500 focus:ring-red-200" 
-                      : "border-gray-300 focus:border-orange-500 focus:ring-orange-200"
+                    ${
+                      errors.email && touched.email
+                        ? "border-red-500 focus:ring-red-200"
+                        : "border-gray-300 focus:border-orange-500 focus:ring-orange-200"
                     }`}
                 />
-                <ErrorMessage name="email" component="div" className="text-xs text-red-500 font-medium mt-1" />
+                <ErrorMessage
+                  name="email"
+                  component="div"
+                  className="text-xs text-red-500 font-medium mt-1"
+                />
               </div>
 
               {/* Password Field */}
               <div className="flex flex-col gap-1">
-                <label htmlFor="password" className="text-sm font-semibold text-gray-700">
+                <label
+                  htmlFor="password"
+                  className="text-sm font-semibold text-gray-700"
+                >
                   Password
                 </label>
                 <Field
@@ -76,12 +88,17 @@ const LoginForm = () => {
                   type="password"
                   placeholder="••••••••"
                   className={`w-full px-4 py-3 rounded-lg border transition-all outline-none focus:ring-2 
-                    ${errors.password && touched.password 
-                      ? "border-red-500 focus:ring-red-200" 
-                      : "border-gray-300 focus:border-orange-500 focus:ring-orange-200"
+                    ${
+                      errors.password && touched.password
+                        ? "border-red-500 focus:ring-red-200"
+                        : "border-gray-300 focus:border-orange-500 focus:ring-orange-200"
                     }`}
                 />
-                <ErrorMessage name="password" component="div" className="text-xs text-red-500 font-medium mt-1" />
+                <ErrorMessage
+                  name="password"
+                  component="div"
+                  className="text-xs text-red-500 font-medium mt-1"
+                />
               </div>
 
               {/* Submit Button */}
@@ -97,7 +114,10 @@ const LoginForm = () => {
         </Formik>
 
         <p className="text-center text-sm text-gray-500 mt-6">
-          Don't have an account? <span className="text-orange-500 font-bold cursor-pointer hover:underline">Sign Up</span>
+          Dont have an account?{" "}
+          <span className="text-orange-500 font-bold cursor-pointer hover:underline">
+            Sign Up
+          </span>
         </p>
       </div>
     </div>

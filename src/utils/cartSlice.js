@@ -9,7 +9,7 @@ const cartSlice = createSlice({
     addItem: (state, action) => {
       const item = action.payload;
 
-      // TO check if item already exists
+      // TO check if item already exts
       const existingItem = state.items.find((i) => i.id === item.id);
 
       if (existingItem) {

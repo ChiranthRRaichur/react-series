@@ -62,6 +62,7 @@ const Body = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {filteredRestaurants.map((restaurant) => (
           <Link
+            data-testid="resCard"
             key={restaurant.info.id}
             to={`/restaurant/${restaurant.info.id}`}
             className="flex flex-col p-4 border border-gray-100 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 bg-white group"

@@ -2,18 +2,12 @@ import { IMG_URL } from "../utils/constant";
 
 const RestaurantCards = (props) => {
   const { resData } = props;
-  const { 
-    name, 
-    cloudinaryImageId, 
-    avgRating, 
-    cuisines, 
-    costForTwo, 
-    sla 
-  } = resData?.info || {};
+  console.log("resData", resData);
+  const { name, cloudinaryImageId, avgRating, cuisines, costForTwo, sla } =
+    resData?.info || {};
 
   return (
     <div className="flex flex-col h-full bg-white">
-      
       <div className="relative w-full aspect-video overflow-hidden rounded-xl mb-3">
         <img
           className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
@@ -56,7 +50,8 @@ const RestaurantCards = (props) => {
 export const Withlabeleddiscount = (RestaurantCards) => {
   return (props) => {
     // Check if the restaurant has a 50% OFF discount
-    const discountHeader = props?.resData?.info?.aggregatedDiscountInfoV3?.header;
+    const discountHeader =
+      props?.resData?.info?.aggregatedDiscountInfoV3?.header;
     const isFiftyOff = discountHeader === "50% OFF";
 
     return (
